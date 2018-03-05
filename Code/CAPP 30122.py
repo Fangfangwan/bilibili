@@ -158,17 +158,11 @@ class Bilibili:
 ##############################Test##################################
 
 #load data
-#cats = ['动画','娱乐','时尚','游戏','生活','科技','音乐','鬼畜','影视']
+#cats = ['游戏','生活','鬼畜']
 
-#file_paths = ['/Users/lingdai/Documents/Bilibili/BLData动画.txt',
-#              '/Users/lingdai/Documents/Bilibili/BLData娱乐.txt',
-#              '/Users/lingdai/Documents/Bilibili/BLData时尚.txt',
-#              '/Users/lingdai/Documents/Bilibili/BLData游戏.txt',
+#file_paths = ['/Users/lingdai/Documents/Bilibili/BLData游戏.txt',
 #              '/Users/lingdai/Documents/Bilibili/BLData生活.txt',
-#              '/Users/lingdai/Documents/Bilibili/BLData科技.txt',
-#              '/Users/lingdai/Documents/Bilibili/BLData音乐.txt',
-#              '/Users/lingdai/Documents/Bilibili/BLData鬼畜.txt',
-#              '/Users/lingdai/Documents/Bilibili/BLData影视.txt']
+#              '/Users/lingdai/Documents/Bilibili/BLData鬼畜.txt']
 
 #testBL = Bilibili(categories=cats, file_paths=file_paths)
 #print(testBL.dataframe[:1])
@@ -179,8 +173,7 @@ class Bilibili:
 #testBL.load_stopwords('/Users/lingdai/Downloads/ChineseStopwords.txt')
 #testBL.smart_cut_corpus(user_dict='/Users/lingdai/Downloads/BilibiliWords.txt')
 #
-#testBL.generate_D2V_model('Bilibili7000', size=7000)
+#testBL.generate_D2V_model('Bilibili3000', size=3000)
 
-#print(testBL.topk_similar_videos('【五五开】在下挂逼，有何贵干', 'Bilibili7000', topk=10))
-#print(testBL.topk_similar_videos('【渣渣辉】我是贪玩小辉', 'Bilibili7000', topk=10))
-#print(testBL.topk_similar_videos('【更新1p，告别蝴蝶袖】美丽芭蕾 天鹅臂 累断手','Bilibili7000', topk=10))
+#print(testBL.topk_similar_videos('【五五开】在下挂逼，有何贵干', 'Bilibili7000', topk=5))
+#print(testBL.topk_similar_videos('【更新1p，告别蝴蝶袖】美丽芭蕾 天鹅臂 累断手','Bilibili7000', topk=5))
