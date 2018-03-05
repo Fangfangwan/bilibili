@@ -181,6 +181,6 @@ class Bilibili:
 #
 #testBL.generate_D2V_model('Bilibili7000', size=7000)
 
-print(testBL.topk_similar_videos('【五五开】在下挂逼，有何贵干', 'Bilibili7000', topk=10))
-print(testBL.topk_similar_videos('【渣渣辉】我是贪玩小辉', 'Bilibili7000', topk=10))
-print(testBL.topk_similar_videos('【更新1p，告别蝴蝶袖】美丽芭蕾 天鹅臂 累断手','Bilibili7000', topk=10))
+#print(testBL.topk_similar_videos('【五五开】在下挂逼，有何贵干', 'Bilibili7000', topk=10))
+#print(testBL.topk_similar_videos('【渣渣辉】我是贪玩小辉', 'Bilibili7000', topk=10))
+#print(testBL.topk_similar_videos('【更新1p，告别蝴蝶袖】美丽芭蕾 天鹅臂 累断手','Bilibili7000', topk=10))
