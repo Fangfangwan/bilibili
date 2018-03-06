@@ -6,17 +6,15 @@ import jieba
 
 
 class Bilibili:
-    def __init__(self, categories, file_paths):
-        if len(categories) != len(file_paths):
-            raise Exception('Error: categories and file_paths lengths do not match')
+    def __init__(self, cat_path_dict):
         df_list = []
-        for file_ in file_paths:
-            df = pd.read_csv(file_, sep="|", header=0)
+        for cat, path in cat_path_dict.items():
+            df = pd.read_csv(path, sep="|", header=0)
             df_list.append(df)
         BLDF = pd.concat(df_list)
         BLDF = BLDF.drop_duplicates(subset=['video_title'], keep='first')
 
-        self.categories = len(categories)
+        self.categories = len(cat_path_dict)
         self.videos = len(BLDF)
         self.dataframe = BLDF
         self.D2Vmodels = {}
@@ -115,17 +113,29 @@ class Bilibili:
         D2Vmodel = gensim.models.doc2vec.Doc2Vec(taggedDocs, size=size)
         self.D2Vmodels[model_name] = D2Vmodel
 
-    def save_D2V_model(self, model_name):
+    def save_D2V_model(self, fname, model_name):
         """
         Save D2V model for later use
         """
-        self.D2Vmodels[model_name].save(model_name)
+        self.D2Vmodels[model_name].save(fname)
 
-    def load_D2V_model(self, model_name):
+    def finish_training_D2V_model(self, model_name):
+        """
+        Finish training a model (=no more updates, only querying) to trim unneeded model memory.
+        """
+        self.D2Vmodels[model_name].delete_temporary_training_data(keep_doctags_vectors=True, keep_inference=True)
+
+    def avai_D2V_model(self):
+        """
+        Return a list of currently available D2V models
+        """
+        return self.D2Vmodels.keys()
+
+    def load_D2V_model(self, model_name, fname):
         """
         Load saved D2V model
         """
-        D2Vmodel = gensim.models.doc2vec.Doc2Vec.load(model_name)
+        D2Vmodel = gensim.models.doc2vec.Doc2Vec.load(fname)
         self.D2Vmodels[model_name] = D2Vmodel
 
     def topk_similar_videos(self, video_name, model_name, topk=10):
