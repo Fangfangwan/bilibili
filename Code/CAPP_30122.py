@@ -186,23 +186,3 @@ class Bilibili:
             figname = figname + ".pdf"
             plt.savefig(figname, format='pdf')
         plt.show()
-
-##############################Test##################################
-
-#load data
-#cat_dict = {'游戏':'https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/BLDataGames.txt',
-#            '鬼畜':'https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/BLDataKichiku.txt'}
-
-#testBL = Bilibili(cat_dict)
-#print(testBL.dataframe[:1])
-#print("")
-
-#data processing
-#testBL.load_emoticons('https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/emoticons.txt')
-#testBL.load_stopwords('https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/ChineseStopwords.txt')
-#testBL.smart_cut_corpus()
-#
-#testBL.generate_D2V_model('Bilibili500', size=500)
-
-#print(testBL.topk_similar_videos('【五五开】在下挂逼，有何贵干', 'Bilibili500', topk=5))
-#testBL.generate_wordcloud(main_category = '鬼畜') #use a local font path to work!!!
