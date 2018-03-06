@@ -12,4 +12,4 @@ print(testBL.topk_similar_videos('【五五开】在下挂逼，有何贵干', '
 
 testBL.generate_wordcloud(main_category = '鬼畜', font_path = None)
 
-#change font_paths to a local font path!
+#change font_path to a local font path!
