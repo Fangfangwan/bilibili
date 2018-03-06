@@ -188,23 +188,20 @@ class Bilibili:
 ##############################Test##################################
 
 #load data
-#cats = ['游戏','生活','鬼畜']
+#cat_dict = {'游戏':'https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/BLDataGames.txt',
+#            '鬼畜':'https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/BLDataKichiku.txt'}
 
-#file_paths = ['/Users/lingdai/Documents/Bilibili/BLData游戏.txt',
-#              '/Users/lingdai/Documents/Bilibili/BLData生活.txt',
-#              '/Users/lingdai/Documents/Bilibili/BLData鬼畜.txt']
-
-#testBL = Bilibili(categories=cats, file_paths=file_paths)
+#testBL = Bilibili(cat_dict)
 #print(testBL.dataframe[:1])
 #print("")
 
 #data processing
-#testBL.load_emoticons('/Users/lingdai/Documents/emoticons.txt')
-#testBL.load_stopwords('/Users/lingdai/Downloads/ChineseStopwords.txt')
-#testBL.smart_cut_corpus(user_dict='/Users/lingdai/Downloads/BilibiliWords.txt')
+#testBL.load_emoticons('https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/emoticons.txt')
+#testBL.load_stopwords('https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/ChineseStopwords.txt')
+#testBL.smart_cut_corpus(user_dict=https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/BilibiliWords.txt')
 #
-#testBL.generate_D2V_model('Bilibili1000', size=1000)
+#testBL.generate_D2V_model('Bilibili500', size=500)
 
-#print(testBL.topk_similar_videos('【五五开】在下挂逼，有何贵干', 'Bilibili1000', topk=5))
+#print(testBL.topk_similar_videos('【五五开】在下挂逼，有何贵干', 'Bilibili500', topk=5))
 #print(testBL.topk_similar_videos('【更新1p，告别蝴蝶袖】美丽芭蕾 天鹅臂 累断手','Bilibili1000', topk=5))
-#testBL.generate_wordcloud(main_category = '鬼畜', font_path = 'bilibili/Data/simhei.ttf')
+#testBL.generate_wordcloud(main_category = '鬼畜', font_path = 'https://github.com/Fangfangwan/bilibili/tree/master/Data/simhei.ttf')
