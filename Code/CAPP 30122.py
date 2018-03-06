@@ -3,7 +3,8 @@ import gensim
 import sklearn
 import sklearn.metrics
 import jieba
-
+import wordcloud
+import matplotlib.pyplot as plt
 
 class Bilibili:
     def __init__(self, cat_path_dict):
@@ -125,7 +126,7 @@ class Bilibili:
         """
         self.D2Vmodels[model_name].delete_temporary_training_data(keep_doctags_vectors=True, keep_inference=True)
 
-    def avai_D2V_model(self):
+    def avail_D2V_model(self):
         """
         Return a list of currently available D2V models
         """
@@ -164,6 +165,23 @@ class Bilibili:
 
         return output_df
 
+    def generate_wordcloud(self, main_category, sub_category=None, max_words=100, font=None,
+                           savefig=False, figname='wordcloud'):
+        if sub_category:
+            tokens= self.dataframe[('main category'==main_category)
+                                   &('sub category'==sub_category)]['normalized_words'].sum()
+        else:
+            tokens = self.dataframe['main category'==main_category]['normalized_words'].sum()
+        
+        wc = wordcloud.WordCloud(background_color="white",
+                                 max_words=max_words,
+                                 width=1000, height=1000, mode='RGBA',
+                                 scale=.5).generate(" ".join(tokens))
+        plt.imshow(wc)
+        plt.axis("off")
+        if savefig and figname:
+            figname = figname + ".pdf"
+            plt.savefig(figname, format='pdf')
 
 ##############################Test##################################
 
