@@ -4,6 +4,8 @@ import sklearn
 import sklearn.metrics
 import jieba
 import wordcloud
+import matplotlib as mpl
+mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as mfm
 
@@ -169,10 +171,10 @@ class Bilibili:
     def generate_wordcloud(self, main_category, sub_category=None, max_words=100, font_path=None,
                            savefig=False, figname='wordcloud'):
         if sub_category:
-            tokens= self.dataframe[('main category' == main_category)
-                                   &('sub category' == sub_category)]['normalized_words'].sum()
+            tokens= self.dataframe[(self.dataframe['main category'] == main_category)
+                                   &(self.dataframe['sub category'] == sub_category)]['normalized_words'].sum()
         else:
-            tokens = self.dataframe['main category' == main_category]['normalized_words'].sum()
+            tokens = self.dataframe[self.dataframe['main category'] == main_category]['normalized_words'].sum()
 
         wc = wordcloud.WordCloud(font_path=font_path,
                                  background_color="white",
@@ -184,6 +186,7 @@ class Bilibili:
         if savefig:
             figname = figname + ".pdf"
             plt.savefig(figname, format='pdf')
+        plt.show()
 
 ##############################Test##################################
 
@@ -198,9 +201,9 @@ class Bilibili:
 #data processing
 #testBL.load_emoticons('https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/emoticons.txt')
 #testBL.load_stopwords('https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/ChineseStopwords.txt')
-#testBL.smart_cut_corpus(user_dict=https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/BilibiliWords.txt')
+#testBL.smart_cut_corpus()
 #
 #testBL.generate_D2V_model('Bilibili500', size=500)
 
 #print(testBL.topk_similar_videos('【五五开】在下挂逼，有何贵干', 'Bilibili500', topk=5))
-#testBL.generate_wordcloud(main_category = '鬼畜', font_path = 'https://github.com/Fangfangwan/bilibili/tree/master/Data/simhei.ttf')
+#testBL.generate_wordcloud(main_category = '鬼畜') #use a local font path to work!!!
