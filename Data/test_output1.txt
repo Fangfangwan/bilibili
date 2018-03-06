@@ -1,0 +1,11 @@
+|Video Title|Category|URL|Similarity
+0|【中字】美丽芭蕾 狂瘦上半身合集 1.天鹅臂瘦肩膀 2.瘦手臂后侧（甩走蝴蝶袖）3.新娘纤臂（哑铃）|时尚/健身|https://www.bilibili.com/video/av5407024/|0.7858899831771851
+1|五分钟在家瘦腰运动！快速瘦肚子小蛮腰，马甲线一周现形！适合初学者【周六野Zoey】|时尚/健身|https://www.bilibili.com/video/av8775849/|0.7691256999969482
+2|力荐！！【中英双语】Ballet Beautiful 美丽芭蕾 P5 消灭大腿外侧赘肉！塑形！|时尚/健身|https://www.bilibili.com/video/av12384003/|0.7408206462860107
+3|【双语】ballet beautiful 美丽芭蕾 【史上最全】健身 减脂|时尚/健身|https://www.bilibili.com/video/av6440533/|0.7266538143157959
+4|最有效的瘦脸操：有手就能瘦！|时尚/美妆|https://www.bilibili.com/video/av17741566/|0.6815263032913208
+5|力荐！【中英双语】Ballet Beautiful 美丽芭蕾P4 大腿内侧燃脂塑形|时尚/健身|https://www.bilibili.com/video/av12383913/|0.6475707292556763
+6|papi酱的周一放送——长大以后，你会成为一个什么样的家长？|生活/搞笑|https://www.bilibili.com/video/av19178920/|0.625937819480896
+7|【潘雨润】自我解刨形整容经历分享(｡ì _ í｡)|时尚/美妆|https://www.bilibili.com/video/av18851539/|0.5801824927330017
+8|床上全身燃脂运动！8分钟加速减肥瘦腰肚瘦腿！太忙？没地方？进来吧！为做HIIT准备！|时尚/健身|https://www.bilibili.com/video/av10585616/|0.5697754621505737
+9|【中字】Ballet Beautiful 美丽芭蕾第三套  瘦腿提臀|时尚/健身|https://www.bilibili.com/video/av4489689/|0.5634307861328125
