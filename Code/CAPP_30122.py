@@ -7,7 +7,6 @@ import wordcloud
 import matplotlib as mpl
 mpl.use('TkAgg')
 import matplotlib.pyplot as plt
-import matplotlib.font_manager as mfm
 
 class Bilibili:
     def __init__(self, cat_path_dict):
