@@ -203,7 +203,8 @@ class Bilibili:
 #testBL.load_stopwords('/Users/lingdai/Downloads/ChineseStopwords.txt')
 #testBL.smart_cut_corpus(user_dict='/Users/lingdai/Downloads/BilibiliWords.txt')
 #
-#testBL.generate_D2V_model('Bilibili3000', size=3000)
+#testBL.generate_D2V_model('Bilibili1000', size=1000)
 
-#print(testBL.topk_similar_videos('【五五开】在下挂逼，有何贵干', 'Bilibili7000', topk=5))
-#print(testBL.topk_similar_videos('【更新1p，告别蝴蝶袖】美丽芭蕾 天鹅臂 累断手','Bilibili7000', topk=5))
+#print(testBL.topk_similar_videos('【五五开】在下挂逼，有何贵干', 'Bilibili1000', topk=5))
+#print(testBL.topk_similar_videos('【更新1p，告别蝴蝶袖】美丽芭蕾 天鹅臂 累断手','Bilibili1000', topk=5))
+#testBL.generate_wordcloud(main_category = '鬼畜', font_path = 'bilibili/Data/simhei.ttf')
