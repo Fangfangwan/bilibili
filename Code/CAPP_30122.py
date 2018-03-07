@@ -17,20 +17,31 @@ class Bilibili:
         BLDF = pd.concat(df_list)
         BLDF = BLDF.drop_duplicates(subset=['video_title'], keep='first')
 
-        self.categories = cat_path_dict
-        self.videos = len(BLDF)
+        self.cat_dict = cat_path_dict
         self.dataframe = BLDF
         self.D2Vmodels = {}
         self._short = ['233','555','666','哦哦','噢噢','哈哈','喔喔',"啊啊",'？','！','。']
         self._stopwords = [' ',',','啊','啊啊','啊啊','哈','哈哈','。','？','！']
         self._emoticons = []
 
-    def available_categories(self):
+    def categories(self):
         """
         Return currently available video categories
         """
-        return self.categories.keys()
+        return self.cat_dict.keys()
 
+    def number_of_categories(self):
+        """
+        Return the number of video categories in the database
+        """
+        return len(self.cat_dict)
+
+    def number_of_videos(self):
+        """
+        Return the number of videos in the databse
+        """
+        return len(self.dataframe)
+        
     def topk_videos_by_cat(self, main_category, sub_category=None, topk=5):
         """
         Return top k videos in specified category
