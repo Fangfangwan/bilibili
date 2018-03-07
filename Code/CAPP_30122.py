@@ -41,7 +41,7 @@ class Bilibili:
         Return the number of videos in the databse
         """
         return len(self.dataframe)
-        
+
     def topk_videos_by_cat(self, main_category, sub_category=None, topk=5):
         """
         Return top k videos in specified category
@@ -177,7 +177,7 @@ class Bilibili:
         D2Vmodel = gensim.models.doc2vec.Doc2Vec.load(fname)
         self.D2Vmodels[model_name] = D2Vmodel
 
-    def topk_similar_videos(self, video_name, model_name, topk=10):
+    def topk_similar_videos(self, video_name, model_name, topk=5):
         """
         Find top k similar videos based on similarity between the content
         of bullet screens (using a specified Doc2Vec model)
@@ -203,6 +203,35 @@ class Bilibili:
         output_df = output_df[['Video Title', 'Category', 'URL', 'Similarity']]
 
         return output_df
+
+    def topk_similar_videos_by_keywords(self, keywords, model_name, topk = 5):
+        """
+        Find top k similar videos based on similarity between the content
+        of bullet screens and user-entered keywords (using a specified Doc2Vec model)
+        """
+        output = []
+        D2Vmodel = self.D2Vmodels[model_name]
+        inferred_vector = D2Vmodel.infer_vector(keywords).reshape(1, -1)
+        for index, row in self.dataframe.iterrows():
+            v = row['video_title']
+            url = row['video_url']
+            cat = row['main category'] + "/" + row['sub category']
+            tagVec = D2Vmodel.docvecs[v].reshape(1, -1)
+            sim_score = sklearn.metrics.pairwise.cosine_similarity(
+                tagVec, inferred_vector)[0][0]
+            output.append((v, cat, url, sim_score))
+
+        output.sort(key=lambda x: x[3], reverse=True)
+        output = output[1:topk + 1]
+
+        output_df = pd.DataFrame({'Video Title': [x[0] for x in output],
+                                  'Category': [x[1] for x in output],
+                                  'URL': [x[2] for x in output],
+                                  'Similarity': [x[3] for x in output]})
+        output_df = output_df[['Video Title', 'Category', 'URL', 'Similarity']]
+
+        return output_df
+
 
     def generate_wordcloud(self, main_category, sub_category=None, max_words=100, font_path=None,
                            savefig=False, figname='wordcloud'):
