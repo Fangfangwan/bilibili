@@ -239,10 +239,10 @@ class Bilibili:
         Generate a word cloud of the specified video category.
         """
         if sub_category:
-            tokens= self.dataframe[(self.dataframe['main category'] == main_category)
-                                   &(self.dataframe['sub category'] == sub_category)]['normalized_words'].sum()
+            tokens= list(self.dataframe[(self.dataframe['main category'] == main_category)
+                                   &(self.dataframe['sub category'] == sub_category)]['normalized_words'].sum())
         else:
-            tokens = self.dataframe[self.dataframe['main category'] == main_category]['normalized_words'].sum()
+            tokens = list(self.dataframe[self.dataframe['main category'] == main_category]['normalized_words'].sum())
 
         wc = wordcloud.WordCloud(font_path=font_path,
                                  background_color="white",
