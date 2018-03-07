@@ -1,4 +1,4 @@
-import CAPP_30122
+from CAPP_30122 import Bilibili
 
 cat_dict = {'游戏':'https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/BLDataGames.txt',
             '鬼畜':'https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Data/BLDataKichiku.txt'}
@@ -8,6 +8,7 @@ testBL = Bilibili(cat_dict)
 testBL.smart_cut_corpus()
 
 testBL.generate_D2V_model('Bilibili500', size=500)
+
 print(testBL.topk_similar_videos('【五五开】在下挂逼，有何贵干', 'Bilibili500', topk=5))
 
 testBL.generate_wordcloud(main_category = '鬼畜', font_path = None)
