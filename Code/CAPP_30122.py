@@ -17,7 +17,7 @@ class Bilibili:
         BLDF = pd.concat(df_list)
         BLDF = BLDF.drop_duplicates(subset=['video_title'], keep='first')
 
-        self.categories = len(cat_path_dict)
+        self.categories = cat_path_dict
         self.videos = len(BLDF)
         self.dataframe = BLDF
         self.D2Vmodels = {}
@@ -25,21 +25,46 @@ class Bilibili:
         self._stopwords = [' ',',','啊','啊啊','啊啊','哈','哈哈','。','？','！']
         self._emoticons = []
 
+    def available_categories(self):
+        """
+        Return currently available video categories
+        """
+        return self.categories.keys()
+
+    def topk_videos_by_cat(self, main_category, sub_category=None, topk=5):
+        """
+        Return top k videos in specified category
+        """
+        if sub_category:
+            return self.dataframe[(self.dataframe['main category']==main_category)&
+                                  (self.dataframe['sub category']==sub_category)][:topk]
+        else:
+            return self.dataframe[self.dataframe['main category']==main_category][:topk]
+
     def load_emoticons(self, file_path):
-        """Load emoticons from a specified txt file"""
+        """
+        Load emoticons from a specified txt file
+        """
         self._emoticons = pd.read_csv(file_path, index_col=None, names=None).iloc[:, 0].tolist()
 
     def add_emoticons(self, emoticon):
-        """Manually add an emoticon"""
+        """
+        Manually add an emoticon
+        """
         if emoticon not in self._emoticons:
             self._emoticons = self._emoticons.append(emoticon)
 
     def load_stopwords(self, file_path):
-        """Load emoticons from a specified txt file"""
+        """
+        Load emoticons from a specified txt file
+        """
         self._stopwords = pd.read_csv(file_path, header = None, delimiter="\t",
                                       quoting=3, error_bad_lines=False).loc[:,0].tolist()
 
-    def add_stopwords(self, stopword):
+    def add_stopword(self, stopword):
+        """
+        Add a stopword to stopwords list (for text processing)
+        """
         if stopword not in self._stopwords:
             self._emoticons = self._emoticons.append(stopword)
 
@@ -143,7 +168,8 @@ class Bilibili:
 
     def topk_similar_videos(self, video_name, model_name, topk=10):
         """
-        find top k similar
+        Find top k similar videos based on similarity between the content
+        of bullet screens (using a specified Doc2Vec model)
         """
         output = []
         D2Vmodel = self.D2Vmodels[model_name]
@@ -169,6 +195,9 @@ class Bilibili:
 
     def generate_wordcloud(self, main_category, sub_category=None, max_words=100, font_path=None,
                            savefig=False, figname='wordcloud'):
+        """
+        Generate a word cloud of the specified video category.
+        """
         if sub_category:
             tokens= self.dataframe[(self.dataframe['main category'] == main_category)
                                    &(self.dataframe['sub category'] == sub_category)]['normalized_words'].sum()
