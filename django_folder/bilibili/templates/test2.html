@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bilibili Video Search</title>
+    </head>
+    <body>
+        <div id="header">
+            <h1>Bilibili Video Search</h1>
+            <p1>Enter either video category to generate word cloud, or video title to find top similar videos,
+                or keywords to find top matching videos
+            but only one at a time.</p1>
+        </div>
+        <div class="frame">
+            <form method="get">
+                {% csrf_token %}
+                <table class="form">
+                {{ form }}
+                </table>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+        <div class="results">
+            {% if picture %}
+                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/wordcloud.jpg">
+            {% endif %}
+            {% if result %}
+                <div class="results">
+                    <table class="videos">
+                    <tr>
+                        {% for col in columns %}
+                        <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for entry in result %}
+                    <tr>
+                        {% for col in entry %}
+                        <td>{{ col }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <p class="num_results">Results: {{ num_results }}</p>
+            {% endif %}
+        </div>
+    </body>
+</html>
