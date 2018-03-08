@@ -130,6 +130,12 @@ class Bilibili:
                     output += words_list
                     output.append(string[pos[0]:pos[1]])
                     str_start = pos[1]
+                words_list = jieba.lcut(string[str_start:])
+                if short:
+                    words_list = [shorten(word, short) for word in words_list]
+                if stopwords:
+                    words_list = [word for word in words_list if word not in stopwords]
+                output += words_list
 
         return output
 
