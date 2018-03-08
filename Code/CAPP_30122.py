@@ -56,28 +56,28 @@ class Bilibili:
         """
         Load emoticons from a specified txt file
         """
-        self._emoticons = pd.read_csv(file_path, index_col=None, names=None).iloc[:, 0].tolist()
+        self._emoticons += pd.read_csv(file_path, index_col=None, names=None).iloc[:, 0].tolist()
 
     def add_emoticons(self, emoticon):
         """
         Manually add an emoticon
         """
         if emoticon not in self._emoticons:
-            self._emoticons = self._emoticons.append(emoticon)
+            self._emoticons.append(emoticon)
 
     def load_stopwords(self, file_path):
         """
         Load emoticons from a specified txt file
         """
-        self._stopwords = pd.read_csv(file_path, header = None, delimiter="\t",
-                                      quoting=3, error_bad_lines=False).loc[:,0].tolist()
+        self._stopwords += pd.read_csv(file_path, header=None, delimiter="\t",
+                                       quoting=3, error_bad_lines=False).loc[:,0].tolist()
 
     def add_stopword(self, stopword):
         """
         Add a stopword to stopwords list (for text processing)
         """
         if stopword not in self._stopwords:
-            self._emoticons = self._emoticons.append(stopword)
+            self._emoticons.append(stopword)
 
     def _find_all_emot(self, emot, bulletstr, start=0, sub=None, lstps=None):
         if not lstps:
@@ -204,13 +204,15 @@ class Bilibili:
 
         return output_df
 
-    def topk_similar_videos_by_keywords(self, keywords, model_name, topk = 5):
+    def topk_similar_videos_by_keywords(self, keywords, model_name, topk=5):
         """
         Find top k similar videos based on similarity between the content
         of bullet screens and user-entered keywords (using a specified Doc2Vec model)
         """
         output = []
         D2Vmodel = self.D2Vmodels[model_name]
+        if isinstance(keywords, str):
+            keywords = [keywords]
         inferred_vector = D2Vmodel.infer_vector(keywords).reshape(1, -1)
         for index, row in self.dataframe.iterrows():
             v = row['video_title']
