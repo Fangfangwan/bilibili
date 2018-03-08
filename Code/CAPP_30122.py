@@ -122,7 +122,7 @@ class Bilibili:
             else:
                 for pos in all_positions:
                     str_end = pos[0]
-                    words_list = jieba.lcut(string)[str_start:str_end]
+                    words_list = jieba.lcut(string[str_start:str_end])
                     if short:
                         words_list = [shorten(word, short) for word in words_list]
                     if stopwords:
