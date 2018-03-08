@@ -20,8 +20,8 @@ class Bilibili:
         self.cat_dict = cat_path_dict
         self.dataframe = BLDF
         self.D2Vmodels = {}
-        self._short = ['233','555','666','哦哦','噢噢','哈哈','喔喔',"啊啊",'？','！','。']
-        self._stopwords = [' ',',','啊','啊啊','啊啊','哈','哈哈','。','？','！']
+        self._short = ['233','333','555','666','哦哦','噢噢','哈哈','喔喔',"啊啊",'？','！','。']
+        self._stopwords = [' ',',','啊','啊啊','啊啊','哈','哈哈','。','？','！','333','噢噢','喔喔']
         self._emoticons = []
 
     def categories(self):
@@ -79,26 +79,22 @@ class Bilibili:
         if stopword not in self._stopwords:
             self._emoticons.append(stopword)
 
-    def _find_all_emot(self, emot, bulletstr, start=0, sub=None, lstps=None):
-        if not lstps:
-            lstps = []
-        if not sub:
-            sub = bulletstr
-        if emot not in sub:
-            return lstps
-        elif start >= len(bulletstr) - 1:
-            return lstps
+    def _find_all_emot(self, emoticon, string, start=0):
+        positions = []
+        if emoticon not in string:
+            return positions
         else:
-            subpos = sub.find(emot)
-            pos = start + subpos
-            end = pos + len(emot)
-            lstps.append((pos, end))
-            start = pos + 1
-            sub = bulletstr[start:]
-            lst_sub = self._find_all_emot(emot, bulletstr, start, sub, lstps)
-            return lstps
+            string_pos = string.find(emoticon)
+            pos = start + string_pos
+            end = pos + len(emoticon)
+            positions.append((pos, end))
+            start = end
+            sub = string[start:]
+            positions += self._find_all_emot(emoticon, string=sub, start=start)
+            return positions
 
     def smart_cut(self, string, patterns, user_dict=None, stopwords=None, short=None):
+
         def shorten(string, short):
             for s in short:
                 if string.startswith(s):
@@ -116,17 +112,21 @@ class Bilibili:
                 jieba.load_userdict(user_dict)
 
             if not all_positions:
-                output = jieba.lcut(string)
+                words_list = jieba.lcut(string)
+                if short:
+                    words_list = [shorten(word, short) for word in words_list]
+                if stopwords:
+                    words_list = [word for word in words_list if word not in stopwords]
+                output += words_list
 
             else:
                 for pos in all_positions:
                     str_end = pos[0]
                     words_list = jieba.lcut(string)[str_start:str_end]
-                    if stopwords:
-                        words_list = [word for word in words_list if word not in stopwords]
                     if short:
                         words_list = [shorten(word, short) for word in words_list]
-
+                    if stopwords:
+                        words_list = [word for word in words_list if word not in stopwords]
                     output += words_list
                     output.append(string[pos[0]:pos[1]])
                     str_start = pos[1]
