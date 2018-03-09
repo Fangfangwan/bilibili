@@ -20,8 +20,47 @@
             </form>
         </div>
         <div class="results">
-            {% if picture %}
-                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/wordcloud.jpg">
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %}
+            {% if error_empty %}
+                <p>{{ error_empty }}</p>
+            {% endif %}
+            {% if error_key %}
+                <p>{{ error_key }}</p>
+            {% endif %}
+            {% if Animee %}
+                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Wordcloud/wordcloudAnimee.jpg">
+            {% endif %}
+            {% if DailyLife %}
+                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Wordcloud/wordcloudDailyLife.jpg">
+            {% endif %}
+            {% if Dance %}
+                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Wordcloud/wordcloudDance.jpg">
+            {% endif %}
+            {% if Domestic %}
+                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Wordcloud/wordcloudDomestic.jpg">
+            {% endif %}
+            {% if Entertainment %}
+                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Wordcloud/wordcloudEntertainment.jpg">
+            {% endif %}
+            {% if Fashion %}
+                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Wordcloud/wordcloudFashion.jpg">
+            {% endif %}
+            {% if Games %}
+                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Wordcloud/wordcloudGames.jpg">
+            {% endif %}
+            {% if Kichiku %}
+                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Wordcloud/wordcloudKichiku.jpg">
+            {% endif %}
+            {% if Movies %}
+                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Wordcloud/wordcloudMovies.jpg">
+            {% endif %}
+            {% if Music %}
+                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Wordcloud/wordcloudMusic.jpg">
+            {% endif %}
+            {% if Science %}
+                <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/Wordcloud/wordcloudScience.jpg">
             {% endif %}
             {% if result %}
                 <div class="results">
