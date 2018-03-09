@@ -1,8 +1,28 @@
+from django.shortcuts import render
+
 from django.http import HttpResponse
 from django.template import loader
-from . import bilibiliclass
+from .models import Category
+
+# Create your views here.
+
+def index(request):
+	all_categories = Category.objects.all()
+	template = loader.get_template('videos/inde.html')
+	context = {
+	    'all_categories': all_categories
+	}
+	return HttpResponse(template.render(context, request))
+
+def detail(request, video_id):
+	try:
+		category = Category.objects.get(pk=category_id)
+	except Category.DoesNotExist:
+		raise Http404("Category does not exist")
+	return HttpResponse('<h2>Details for video:' + str(video_id) + '</h2>')
 
 
+import json
 import traceback
 import sys
 import csv
@@ -14,6 +34,7 @@ from operator import and_
 from django.shortcuts import render
 from django import forms
 
+from courses import find_courses
 
 NOPREF_STR = 'No preference'
 RES_DIR = os.path.join(os.path.dirname(__file__), '..', 'res')
@@ -23,128 +44,6 @@ COLUMN_NAMES = dict(
     v_url = 'url',
     similar_score = 'Similar Score',
 )
-
-DF_LIST = ['Animee', 'DailyLife', 'Dance', 'Domestic', 'Entertainment',
-           'Fashion', 'Games', 'Kichiku', 'Movies', 'Music', 'Science' ]
-
-TRANSLATION = {'Animee': '动画', 'DailyLife': '生活', 'Dance': '舞蹈', 'Domestic': '国创相关',
-               'Entertainment': '娱乐',
-           'Fashion': '时尚', 'Games': '游戏', 'Kichiku': '鬼畜', 'Movies': '影视', 'Music': '音乐',
-               'Science': '科技'}
-
-CAT_PATH = {}
-for cat in DF_LIST:
-
-    path = 'Data/BLData{}.txt'.format(cat)
-
-    CAT_PATH[cat] = path
-
-bilibili233 = bilibiliclass.Bilibili(cat_path_dict = CAT_PATH)
-bilibili233.load_emoticons('Data/emoticons.txt')
-bilibili233.load_stopwords('Data/ChineseStopwords.txt')
-bilibili233.load_D2V_model('BLmodel', os.path.abspath('videos/D2Vmodel233'))
-
-'''
-ANIMEE_PATH = {}
-
-ANIMEE_PATH['Animee'] = 'Data/BLDataAnimee.txt'
-
-bilibili_animee = bilibiliclass.Bilibili(cat_path_dict = ANIMEE_PATH)
-
-bilibili_animee.load_emoticons('Data/emoticons.txt')
-
-bilibili_animee.load_stopwords('Data/ChineseStopwords.txt')
-
-bilibili_animee.load_D2V_model('Animee_model', os.path.abspath('videos/D2VAnimee'))
-
-bilibili_animee.generate_wordcloud(main_category = '动画', font_path = 'Data/simhei.ttf',
-                                  savefig = True, figname = 'wordcloud_animee')
-
-DANCE_PATH = {}
-
-DANCE_PATH['Dance'] = 'Data/BLDataDance.txt'
-
-bilibili_dance = bilibiliclass.Bilibili(cat_path_dict = DANCE_PATH)
-
-bilibili_dance.load_emoticons('Data/emoticons.txt')
-
-bilibili_dance.load_stopwords('Data/ChineseStopwords.txt')
-
-bilibili_dance.smart_cut_corpus()
-
-bilibili_dance.generate_D2V_model('Dance_model', 500)
-
-bilibili_dance.finish_training_D2V_model('Dance_model')
-
-bilibili_dance.save_D2V_model('D2VDance', 'Dance_model')
-
-bilibili_dance.generate_wordcloud(main_category = '舞蹈', font_path = 'Data/simhei.ttf',
-                                  savefig = True, figname = 'wordcloud_dance')
-
-DLIFE_PATH = {}
-
-DLIFE_PATH['DailyLife'] = 'Data/BLDataDailyLife.txt'
-
-bilibili_dlife = bilibiliclass.Bilibili(cat_path_dict = DLIFE_PATH)
-
-bilibili_dlife.load_emoticons('Data/emoticons.txt')
-
-bilibili_dlife.load_stopwords('Data/ChineseStopwords.txt')
-
-bilibili_dlife.smart_cut_corpus()
-
-bilibili_dlife.generate_D2V_model('dlife_model', 500)
-
-bilibili_dlife.finish_training_D2V_model('dlife_model')
-
-bilibili_dlife.save_D2V_model('D2Vdlife', 'dlife_model')
-
-
-bilibili_dlife.generate_wordcloud(main_category = '生活', font_path = 'Data/simhei.ttf',
-                                  savefig = True, figname = 'wordcloud_dlife')
-
-DOM_PATH = {}
-
-DOM_PATH['Domestic'] = 'Data/BLDataDomestic.txt'
-
-bilibili_domestic = bilibiliclass.Bilibili(cat_path_dict = DOM_PATH)
-
-bilibili_domestic.load_emoticons('Data/emoticons.txt')
-
-bilibili_domestic.load_stopwords('Data/ChineseStopwords.txt')
-
-bilibili_domestic.smart_cut_corpus()
-
-bilibili_domestic.generate_D2V_model('domestic_model', 500)
-
-bilibili_domestic.finish_training_D2V_model('domestic_model')
-
-bilibili_domestic.save_D2V_model('D2Vdomestic', 'domestic_model')
-
-bilibili_domestic.generate_wordcloud(main_category = '国创相关', font_path = 'Data/simhei.ttf',
-                                  savefig = True, figname = 'wordcloud_domestic')
-
-ENT_PATH = {}
-
-ENT_PATH['Entertainment'] = 'Data/BLDataEntertainment.txt'
-
-bilibili_entertainment = bilibiliclass.Bilibili(cat_path_dict = ENT_PATH)
-
-bilibili_entertainment.load_emoticons('Data/emoticons.txt')
-
-bilibili_entertainment.load_stopwords('Data/ChineseStopwords.txt')
-
-bilibili_entertainment.smart_cut_corpus()
-
-bilibili_entertainment.generate_D2V_model('entertainment_model', 500)
-
-bilibili_entertainment.finish_training_D2V_model('entertainment_model')
-
-bilibili_entertainment.save_D2V_model('D2Ventertainment', 'entertainment_model')
-
-bilibili_entertainment.generate_wordcloud(main_category = '娱乐', font_path = 'Data/simhei.ttf',
-                                  savefig = True, figname = 'wordcloud_entertainment')
-'''
 
 
 def _valid_result(res):
@@ -186,19 +85,45 @@ def _build_dropdown(options):
 CATS = _build_dropdown([None] + _load_res_column('cat_list.csv'))
 
 
+class IntegerRange(forms.MultiValueField):
+    def __init__(self, *args, **kwargs):
+        fields = (forms.IntegerField(),
+                  forms.IntegerField())
+        super(IntegerRange, self).__init__(fields=fields,
+                                           *args, **kwargs)
+
+    def compress(self, data_list):
+        if data_list and (data_list[0] is None or data_list[1] is None):
+            raise forms.ValidationError('Must specify both lower and upper '
+                                        'bound, or leave both blank.')
+
+        return data_list
+
+
+
+
+RANGE_WIDGET = forms.widgets.MultiWidget(widgets=(forms.widgets.NumberInput,
+                                                  forms.widgets.NumberInput))
+
+
+
+
+
 class SearchForm(forms.Form):
     video_title = forms.CharField(
-        label = 'Search similar videos by video title',
-        help_text = 'e.g. 【五五开】在下挂逼，有何贵干',
+        label = 'Search video title',
+        help_text = 'e.g. 【琅琊榜】鬼畜 私炮房炸了',
+        required = True)
+
+    topk = forms.IntegerField(
+        label = 'Number of videos recommended',
+        help_text = 'e.g. 5',
         required = False)
 
-    key_words = forms.CharField(
-        label = 'Search most related videos by key words',
-        help_text = 'e.g. 火钳留名 老铁 厉害了',
-        required = False
-    )
+    category = forms.ChoiceField(label = 'Category', choices = CATS, required = True)
 
-    category = forms.ChoiceField(label = 'Category Word Cloud', choices = CATS, required = False)
+
+
 
 def home(request):
     context = {}
@@ -208,49 +133,54 @@ def home(request):
         form = SearchForm(request.GET)
         # check whether it's valid:
         if form.is_valid():
+
+            # Convert form data to an args dictionary for find_courses
+
             video_title = form.cleaned_data['video_title']
+            k = form.cleaned_data['topk']
             category = form.cleaned_data['category']
-            key_words = form.cleaned_data['key_words']
-            if [video_title, category, key_words].count('') < 2:
-                context['error'] = 'Please enter only one searching criterion.'
-            elif category:
-                context['picture'] = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
 
-            elif video_title:
-                try:
-                    out_df = bilibili233.topk_similar_videos(video_title, 'BLmodel', topk=10)
-                    res = (out_df.columns.values.tolist(), out_df.values.tolist())
-                    columns, result = res
+            v_data = pd.read_csv('BLData{}.txt'.format(category), \
+                                 sep = '|', header = 0)
 
-                    # Wrap in tuple if result is not already
-                    if result and isinstance(result[0], str):
-                        result = [(r,) for r in result]
+            try:
+                res = TopK_similar_videos(v_title = video_title, \
+                                          VideoData = v_data, topk = k, )
+            except Exception as e:
+                print('Exception caught')
+                bt = traceback.format_exception(*sys.exc_info()[:3])
+                context['err'] = """
+                An exception was thrown in TopK_similar_videos:
+                <pre>{}
+{}</pre>
+                """.format(e, '\n'.join(bt))
 
-                    context['result'] = result
-                    context['num_results'] = len(result)
-                    context['columns'] = [COLUMN_NAMES.get(col, col) for col in columns]
-
-                except KeyError:
-                    context['error_key'] = 'Please enter a video name in the database.'
-
-            elif key_words:
-                out_df = bilibili233.topk_similar_videos_by_keywords(key_words, 'BLmodel', topk=10)
-                res = (out_df.columns.values.tolist(), out_df.values.tolist())
-                columns, result = res
-                # Wrap in tuple if result is not already
-                if result and isinstance(result[0], str):
-                    result = [(r,) for r in result]
-
-                context['result'] = result
-                context['num_results'] = len(result)
-                context['columns'] = [COLUMN_NAMES.get(col, col) for col in columns]
-
-            else:
-                context['error_empty'] = 'Please enter your searching criterion.'
-
+                res = None
     else:
         form = SearchForm()
+
+    # Handle different responses of res
+    if res is None:
+        context['result'] = None
+    elif isinstance(res, str):
+        context['result'] = None
+        context['err'] = res
+        result = None
+    elif not _valid_result(res):
+        context['result'] = None
+        context['err'] = ('Return of TopK_similar_videos has the wrong data type. '
+                          )
+    else:
+        columns, result = res
+
+        # Wrap in tuple if result is not already
+        if result and isinstance(result[0], str):
+            result = [(r,) for r in result]
+
+        context['result'] = result
+        context['num_results'] = len(result)
+        context['columns'] = [COLUMN_NAMES.get(col, col) for col in columns]
+
     context['form'] = form
-    return render(request, 'test2.html', context)
-
-
+    return render(request, 'index.html', context)
+# Create your views here.
