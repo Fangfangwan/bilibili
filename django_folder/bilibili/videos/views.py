@@ -214,8 +214,9 @@ def home(request):
             if [video_title, category, key_words].count('') < 2:
                 context['error'] = 'Please enter only one searching criterion.'
             elif category:
-                context['picture'] = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-
+                for cat in DF_LIST:
+                    if category == cat:
+                        context[category] = category
             elif video_title:
                 try:
                     out_df = bilibili233.topk_similar_videos(video_title, 'BLmodel', topk=10)
