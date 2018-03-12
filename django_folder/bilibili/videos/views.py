@@ -226,6 +226,21 @@ def home(request):
                     # Wrap in tuple if result is not already
                     if result and isinstance(result[0], str):
                         result = [(r,) for r in result]
+                    title_lst = []
+                    category_lst = []
+                    url_lst = []
+                    similarity_lst = []
+                    for row in result:
+                        title_lst.append(row[0])
+                        category_lst.append(row[1])
+                        url_lst.append(row[2])
+                        similarity_lst.append(row[3])
+                    for i in range(0, 9):
+                        context['title{}'.format(i)] = title_lst[i]
+                        context['category{}'.format(i)] = category_lst[i]
+                        context['url{}'.format(i)] = url_lst[i]
+
+                        context['sim{}'.format(i)] = similarity_lst[i]
 
                     context['result'] = result
                     context['num_results'] = len(result)
@@ -234,18 +249,39 @@ def home(request):
                 except KeyError:
                     context['error_key'] = 'Please enter a video name in the database.'
 
+
             elif key_words:
+
                 out_df = bilibili233.topk_similar_videos_by_keywords(key_words, 'BLmodel', topk=10)
+
                 res = (out_df.columns.values.tolist(), out_df.values.tolist())
+
                 columns, result = res
+
                 # Wrap in tuple if result is not already
+
                 if result and isinstance(result[0], str):
                     result = [(r,) for r in result]
+                title_lst = []
+                category_lst = []
+                url_lst = []
+                similarity_lst = []
+                for row in result:
+                    title_lst.append(row[0])
+                    category_lst.append(row[1])
+                    url_lst.append(row[2])
+                    similarity_lst.append(row[3])
+                for i in range(0, 9):
+                    context['title{}'.format(i)] = title_lst[i]
+                    context['category{}'.format(i)] = category_lst[i]
+                    context['url{}'.format(i)] = url_lst[i]
 
+                    context['sim{}'.format(i)] = similarity_lst[i]
                 context['result'] = result
-                context['num_results'] = len(result)
-                context['columns'] = [COLUMN_NAMES.get(col, col) for col in columns]
 
+                context['num_results'] = len(result)
+
+                context['columns'] = [COLUMN_NAMES.get(col, col) for col in columns]
             else:
                 context['error_empty'] = 'Please enter your searching criterion.'
 
@@ -253,5 +289,9 @@ def home(request):
         form = SearchForm()
     context['form'] = form
     return render(request, 'test2.html', context)
+
+def hyper_link(request):
+    return HttpResponse(request)
+
 
 
