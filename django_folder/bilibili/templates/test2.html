@@ -4,10 +4,11 @@
         <title>Bilibili Video Search</title>
     </head>
     <body>
+
         <div id="header">
             <img src="https://raw.githubusercontent.com/Fangfangwan/bilibili/master/logo.jpg" style="width:80px;height:60px;">
             <h1>Bilibili Video Search</h1>
-            <p1>Enter either video category to generate word cloud, or video title to find top similar videos,
+            <p1>Enter a video category to generate word cloud, or video title to find top similar videos,
                 or keywords to find top matching videos
             but only one at a time.</p1>
         </div>
@@ -70,14 +71,67 @@
                         {% for col in columns %}
                         <th>{{ col }}</th>
                         {% endfor %}
-                    </tr>
-                    {% for entry in result %}
+                    </tr>>
                     <tr>
-                        {% for col in entry %}
-                        <td>{{ col }}</td>
-                        {% endfor %}
+                        <th>{{ title0 }}</th>
+                        <th>{{ category0 }}</th>
+                        <th><a href={{ url0 }}>{{ url0 }}</a>
+                        <th>{{ sim0 }}</th>
                     </tr>
-                    {% endfor %}
+                    <tr>
+                        <th>{{ title1}}</th>
+                        <th>{{ category1}}</th>
+                        <th><a href={{ url1 }}>{{ url1 }}</a></th>
+                        <th>{{ sim1 }}</th>
+                    </tr>
+                    <tr>
+                        <th>{{ title2}}</th>
+                        <th>{{ category2}}</th>
+                        <th><a href={{ url2 }}>{{ url2 }}</a></th>
+                        <th>{{ sim2 }}</th>
+                    </tr>
+                    <tr>
+                        <th>{{ title3}}</th>
+                        <th>{{ category3}}</th>
+                        <th><a href={{ url3 }}>{{ url3 }}</a></th>
+                        <th>{{ sim3 }}</th>
+                    </tr>
+                    <tr>
+                        <th>{{ title4}}</th>
+                        <th>{{ category4}}</th>
+                        <th><a href={{ url4 }}>{{ url4 }}</a></th>
+                        <th>{{ sim4 }}</th>
+                    </tr>
+                    <tr>
+                        <th>{{ title5}}</th>
+                        <th>{{ category5}}</th>
+                        <th><a href={{ url5 }}>{{ url5 }}</a></th>
+                        <th>{{ sim5 }}</th>
+                    </tr>
+                    <tr>
+                        <th>{{ title6}}</th>
+                        <th>{{ category6}}</th>
+                        <th><a href={{ url6 }}>{{ url6 }}</a></th>
+                        <th>{{ sim6 }}</th>
+                    </tr>
+                    <tr>
+                        <th>{{ title7}}</th>
+                        <th>{{ category7}}</th>
+                        <th><a href={{ url7 }}>{{ url7 }}</a></th>
+                        <th>{{ sim7 }}</th>
+                    </tr>
+                    <tr>
+                        <th>{{ title8}}</th>
+                        <th>{{ category8}}</th>
+                        <th><a href={{ url8 }}>{{ url8 }}</a></th>
+                        <th>{{ sim8 }}</th>
+                    </tr>
+                    <tr>
+                        <th>{{ title9}}</th>
+                        <th>{{ category9}}</th>
+                        <th><a href={{ url9 }}>{{ url9 }}</a></th>
+                        <th>{{ sim9 }}</th>
+                    </tr>
                 </table>
             </div>
             <p class="num_results">Results: {{ num_results }}</p>
@@ -85,3 +139,4 @@
         </div>
     </body>
 </html>
+
