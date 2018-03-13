@@ -6,9 +6,12 @@ import sys
 import csv
 import os
 import bleach
+import jieba
 
 from functools import reduce
 from operator import and_
+
+jieba.load_userdict('BilibiliWords.txt')
 
 NOPREF_STR = 'No preference'
 RES_DIR = os.path.join(os.path.dirname(__file__), '..', 'res')
