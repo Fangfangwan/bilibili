@@ -8,6 +8,7 @@ import traceback
 import sys
 import csv
 import os
+import jieba
 
 from functools import reduce
 from operator import and_
@@ -15,7 +16,7 @@ from operator import and_
 from django.shortcuts import render
 from django import forms
 
-
+jieba.load_userdict("BilibiliWords.txt")
 NOPREF_STR = 'No preference'
 RES_DIR = os.path.join(os.path.dirname(__file__), '..', 'res')
 COLUMN_NAMES = dict(
