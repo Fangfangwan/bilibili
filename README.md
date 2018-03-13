@@ -20,7 +20,7 @@ In detail:
 
 Code writing by member:
 
-Ling Dai - working on designing web scraping and dataframe generation algorithms, compiling BilibiliWords.txt and ChineseStopwords.txt., and writing bilibiliclass.py.
+Ling Dai - working on designing web scraping and dataframe generation algorithms, designing video recommendation algorithm and "smart cut" Chinese word segmentation algorithm (in bilibiliclass.py), and compiling BilibiliWords.txt and ChineseStopwords.txt.
 
 Fangfang Wan - grabing ranking video id data from JSON file, cleaning up and putting together web scraping & dataframe generation code written by Ling Dai, running code to get data by category, getting wordclouds of 6 out of 11 categories, and Django implementation together with Yilun Dai
 
