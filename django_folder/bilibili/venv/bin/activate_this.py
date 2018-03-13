@@ -4,6 +4,7 @@ activate this virtualenv environment.
 This can be used when you must use an existing Python interpreter, not
 the virtualenv bin/python
 """
+##Generated automatically by Django
 
 try:
     __file__

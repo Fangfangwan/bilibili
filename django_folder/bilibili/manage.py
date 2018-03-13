@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# Generated automatically by Django.
 import os
 import sys
 

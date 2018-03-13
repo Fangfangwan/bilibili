@@ -5,3 +5,4 @@ from django.urls import path
 urlpatterns = [
     path('', views.home, name='home'),
 ]
+# Generated automatically by Django.

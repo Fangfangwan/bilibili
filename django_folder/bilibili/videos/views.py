@@ -1,3 +1,4 @@
+#Used views.py from pa3 ui folder, and modified by Fangfang Wan and Yilun Dai.
 from django.http import HttpResponse
 from django.template import loader
 from . import bilibiliclass
@@ -43,108 +44,6 @@ bilibili233 = bilibiliclass.Bilibili(cat_path_dict = CAT_PATH)
 bilibili233.load_emoticons('Data/emoticons.txt')
 bilibili233.load_stopwords('Data/ChineseStopwords.txt')
 bilibili233.load_D2V_model('BLmodel', os.path.abspath('videos/D2Vmodel233'))
-
-'''
-ANIMEE_PATH = {}
-
-ANIMEE_PATH['Animee'] = 'Data/BLDataAnimee.txt'
-
-bilibili_animee = bilibiliclass.Bilibili(cat_path_dict = ANIMEE_PATH)
-
-bilibili_animee.load_emoticons('Data/emoticons.txt')
-
-bilibili_animee.load_stopwords('Data/ChineseStopwords.txt')
-
-bilibili_animee.load_D2V_model('Animee_model', os.path.abspath('videos/D2VAnimee'))
-
-bilibili_animee.generate_wordcloud(main_category = '动画', font_path = 'Data/simhei.ttf',
-                                  savefig = True, figname = 'wordcloud_animee')
-
-DANCE_PATH = {}
-
-DANCE_PATH['Dance'] = 'Data/BLDataDance.txt'
-
-bilibili_dance = bilibiliclass.Bilibili(cat_path_dict = DANCE_PATH)
-
-bilibili_dance.load_emoticons('Data/emoticons.txt')
-
-bilibili_dance.load_stopwords('Data/ChineseStopwords.txt')
-
-bilibili_dance.smart_cut_corpus()
-
-bilibili_dance.generate_D2V_model('Dance_model', 500)
-
-bilibili_dance.finish_training_D2V_model('Dance_model')
-
-bilibili_dance.save_D2V_model('D2VDance', 'Dance_model')
-
-bilibili_dance.generate_wordcloud(main_category = '舞蹈', font_path = 'Data/simhei.ttf',
-                                  savefig = True, figname = 'wordcloud_dance')
-
-DLIFE_PATH = {}
-
-DLIFE_PATH['DailyLife'] = 'Data/BLDataDailyLife.txt'
-
-bilibili_dlife = bilibiliclass.Bilibili(cat_path_dict = DLIFE_PATH)
-
-bilibili_dlife.load_emoticons('Data/emoticons.txt')
-
-bilibili_dlife.load_stopwords('Data/ChineseStopwords.txt')
-
-bilibili_dlife.smart_cut_corpus()
-
-bilibili_dlife.generate_D2V_model('dlife_model', 500)
-
-bilibili_dlife.finish_training_D2V_model('dlife_model')
-
-bilibili_dlife.save_D2V_model('D2Vdlife', 'dlife_model')
-
-
-bilibili_dlife.generate_wordcloud(main_category = '生活', font_path = 'Data/simhei.ttf',
-                                  savefig = True, figname = 'wordcloud_dlife')
-
-DOM_PATH = {}
-
-DOM_PATH['Domestic'] = 'Data/BLDataDomestic.txt'
-
-bilibili_domestic = bilibiliclass.Bilibili(cat_path_dict = DOM_PATH)
-
-bilibili_domestic.load_emoticons('Data/emoticons.txt')
-
-bilibili_domestic.load_stopwords('Data/ChineseStopwords.txt')
-
-bilibili_domestic.smart_cut_corpus()
-
-bilibili_domestic.generate_D2V_model('domestic_model', 500)
-
-bilibili_domestic.finish_training_D2V_model('domestic_model')
-
-bilibili_domestic.save_D2V_model('D2Vdomestic', 'domestic_model')
-
-bilibili_domestic.generate_wordcloud(main_category = '国创相关', font_path = 'Data/simhei.ttf',
-                                  savefig = True, figname = 'wordcloud_domestic')
-
-ENT_PATH = {}
-
-ENT_PATH['Entertainment'] = 'Data/BLDataEntertainment.txt'
-
-bilibili_entertainment = bilibiliclass.Bilibili(cat_path_dict = ENT_PATH)
-
-bilibili_entertainment.load_emoticons('Data/emoticons.txt')
-
-bilibili_entertainment.load_stopwords('Data/ChineseStopwords.txt')
-
-bilibili_entertainment.smart_cut_corpus()
-
-bilibili_entertainment.generate_D2V_model('entertainment_model', 500)
-
-bilibili_entertainment.finish_training_D2V_model('entertainment_model')
-
-bilibili_entertainment.save_D2V_model('D2Ventertainment', 'entertainment_model')
-
-bilibili_entertainment.generate_wordcloud(main_category = '娱乐', font_path = 'Data/simhei.ttf',
-                                  savefig = True, figname = 'wordcloud_entertainment')
-'''
 
 
 def _valid_result(res):

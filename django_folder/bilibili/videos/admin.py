@@ -2,7 +2,9 @@ from django.contrib import admin
 
 
 # Register your models here.
-from .models import Category
 
-admin.site.register(Category)
+
+
 # Register your models here.
+#!/Users/yilundai/Documents/Winter2018/CS122/bilibili/venv/bin/python
+# Generated automatically by Django.

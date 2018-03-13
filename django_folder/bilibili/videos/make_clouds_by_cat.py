@@ -29,6 +29,24 @@ TRANSLATION = {'Animee': '动画', 'DailyLife': '生活', 'Dance': '舞蹈', 'Do
                'Entertainment': '娱乐',
            'Fashion': '时尚', 'Games': '游戏', 'Kichiku': '鬼畜', 'Movies': '影视', 'Music': '音乐',
                'Science': '科技'}
+
+
+CAT_PATH = {}
+for cat in DF_LIST:
+
+    path = 'Data/BLData{}.txt'.format(cat)
+
+    CAT_PATH[cat] = path
+
+bilibili233 = bilibiliclass.Bilibili(cat_path_dict = CAT_PATH)
+bilibili233.load_emoticons('Data/emoticons.txt')
+bilibili233.load_stopwords('Data/ChineseStopwords.txt')
+bilibili233.smart_cut_corpus()
+bilibili233.generate_D2V_model('BLmodel', size=500)
+bilibili233.finish_training_D2V_model('BLmodel')
+bilibili233.save_D2V_model('D2Vmodel233', "BLmodel")
+
+bilibili233.load_D2V_model('BLmodel', os.path.abspath('videos/D2Vmodel233'))
 #1
 ANIMEE_PATH = {}
 
@@ -39,6 +57,9 @@ bilibili_animee = bilibiliclass.Bilibili(cat_path_dict = ANIMEE_PATH)
 bilibili_animee.load_emoticons('Data/emoticons.txt')
 
 bilibili_animee.load_stopwords('Data/ChineseStopwords.txt')
+bilibili_animee.finish_training_D2V_model('Animee_model')
+
+bilibili_animee.save_D2V_model('D2VAnimee', 'Animee_model')
 
 bilibili_animee.load_D2V_model('Animee_model', os.path.abspath('videos/D2VAnimee'))
 
