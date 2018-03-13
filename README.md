@@ -24,7 +24,7 @@ Ling Dai - working on designing web scraping and dataframe generation algorithms
 
 Fangfang Wan - grabing ranking video id data from JSON file, cleaning up and putting together web scraping & dataframe generation code written by Ling Dai, running code to get data by category, getting wordclouds of 6 out of 11 categories, and Django implementation together with Yilun Dai
 
-Yilun Dai - working on getting emoticons and writing functions of implementing emoticons, , getting wordclouds of 5 out of 11 categories, and Django implementation together with Fangfang Wan.
+Yilun Dai - working on getting emoticons and writing functions of implementing emoticons, getting wordclouds of 5 out of 11 categories, and Django implementation together with Fangfang Wan.
 
 Other sources that we have used:
 
