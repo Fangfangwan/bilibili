@@ -6,7 +6,7 @@ The main folder for submission in our github is django_folder. We may use docume
 Run our code in user interface:
 
 1. Install django, scikit-learn, gensim (no 3.3.0 version, which is problematic) and jieba.
-2. Put large files (D2Vmodel233.wv.vectors.npy and D2Vmodel233.trainables.syn1neg.npy) in django_folder/bilibili/videos.
+2. Put Doc2Vec models (including .wv.vectors.npy files and .trainables.syn1neg.npy files) in django_folder/bilibili/videos.
 3. Change directory to the first bilibili folder in django_folder.
 4. Run  "python manage.py runserver" in shell
 5. Go into http://127.0.0.1:8000/ .
